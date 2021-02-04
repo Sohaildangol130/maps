@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    .location-form{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        border-radius: 5px;
+        z-index: 1;
+        padding: 20px;
+        background-color: #fff;
+        width: 200px;
+        input[type=text]{
+            padding-bottom: 5px;
+        }
+        .longitude,.latitude{
+            position: relative;
+            margin-top: 15px;
+            input{
+                border: none;
+                border-bottom: 1px solid rgb(212, 212, 212);
+                width: 100%;
+            }
+        }
+        button{
+            border: none;
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #07002b;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s all;
+            &:hover{
+                background-color: #040018;
+            }
+        }
+    }
+    #map{
+        height: 100vh;
+        width: 100vw;
+        .gmnoprint, .gm-fullscreen-control{
+            display: none;
+        }
+    }
+}
+
