@@ -7,6 +7,22 @@
 }
 
 body{
+    .hidden{
+        display: none;
+    }
+    .add-location{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        p{
+            padding: 6px 15px;
+            background-color: white;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
     .location-form{
         position: absolute;
         top: 10px;
@@ -16,16 +32,27 @@ body{
         padding: 20px;
         background-color: #fff;
         width: 200px;
+        .title{
+            display: flex;
+            justify-content: space-between;
+            p{
+                font-size: 25px;
+                transform: rotate(45deg);
+                margin-top: -7px;
+                cursor: pointer;
+            }
+        }
         input[type=text]{
             padding-bottom: 5px;
         }
-        .longitude,.latitude{
+        .longitude,.latitude,.name,.price, .image{
             position: relative;
             margin-top: 15px;
             input{
                 border: none;
                 border-bottom: 1px solid rgb(212, 212, 212);
                 width: 100%;
+                padding-bottom: 5px;
             }
         }
         button{
@@ -43,11 +70,88 @@ body{
             }
         }
     }
+    .search-container{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 1;
+        align-items: center;
+
+        .cookies{
+            display: flex;
+            position: absolute;
+            right: 320px;
+            top: 7px;
+            p{
+                background-color:white;
+                font-size: 12px;
+                padding: 5px 10px;
+                border-radius: 20px;
+                margin-right: 10px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: hsl(0, 0%, 90%);
+                }
+            }
+        }
+        .search{
+            input{
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                width: 300px;
+            }
+            button{
+                border: none;
+                padding: 10px;
+                background-color: #fff;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: 0.3s all;
+                &:hover{
+                    background-color: #040018;
+                }
+            }
+        }
+        .search-results{
+            background-color: white;
+            border-radius: 5px;
+            margin-top: 5px;
+            padding: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            .all-search-results{
+                .single-search{
+                    display: flex;
+                    align-items: center;
+                    margin-top: 15px;
+                    cursor: pointer;
+                    .search-image{
+                        height: 60px;
+                        width: 60px;
+                        background-color: black;
+                        border-radius: 5px;
+                    }
+                    .search-details{
+                        margin-left: 15px;
+                    }
+                    &:hover{
+                        background-color: hsl(0, 0%, 95%);
+                    }
+                }
+            }
+        }
+    }
     #map{
         height: 100vh;
         width: 100vw;
         .gmnoprint, .gm-fullscreen-control{
             display: none;
+        }
+        .gm-ui-hover-effect{
+            top: 10px !important;
+            right: 5px !important;
         }
     }
 }
