@@ -63,5 +63,3 @@ const createHTMLMapMarker = ({
   
     return new HTMLMapMarker();
   };
-  
-export default createHTMLMapMarker;

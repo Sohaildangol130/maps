@@ -10,5 +10,3 @@ cookie_data.forEach((index) => {
     var cookie_location_title = all_locations[index]["title"];
     $('.cookies').append("<p>"+cookie_location_title+"</p>")
 });
-
-

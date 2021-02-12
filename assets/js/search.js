@@ -1,25 +1,26 @@
-var a = [];
-var b = [];
-var input = $('.search input');
+function search (map){
+    var location_title = [];
+        var search_locations = [];
+        var input = $('.search input');
 
 for (var i in all_locations){
-    a.push(all_locations[i]["title"].toUpperCase());
+    location_title.push(all_locations[i]["title"].toUpperCase());
 }
 
 input.on('keyup', () => {
-    b=[];
+    search_locations=[];
     $('.all-search-results').empty();
     var filter_value = input.val().toUpperCase();
     if (filter_value != ""){
         $('.search-results').removeClass('hidden');
-        a.forEach((item) => {
+        location_title.forEach((item) => {
             if (item.includes(filter_value)){
                 var c = item.toLowerCase();
                 var d = c.charAt(0).toUpperCase()+c.slice(1);
-                b.push(d)
+                search_locations.push(d)
             }
         })
-        b.forEach((item) => {
+        search_locations.forEach((item) => {
             for (var j in all_locations){
                 if (all_locations[j]["title"] == item){
                     // console.log(all_locations[j]);
@@ -44,7 +45,10 @@ input.on('keyup', () => {
     $(document).find('.single-search').on('click', (elem) => {
         // console.log($(elem.currentTarget).find('.search-title').text());
         for (var i in all_locations){
-            // console.log(i)
+            if (all_locations[i]["title"] === $(elem.currentTarget).find('.search-title').text()){
+                map.setCenter(all_locations[i]["coordinates"]);
+                map.setZoom(16);
+            }
             if (all_locations[i]["title"]===$(elem.target).find('.search-title').text() && !cookie_data.includes(i)){ 
                 cookie_data.push(i);
                 Cookies.set("locations", cookie_data);
@@ -66,3 +70,4 @@ input.on('keyup', () => {
         // console.log(b)
     })    
 })
+}
