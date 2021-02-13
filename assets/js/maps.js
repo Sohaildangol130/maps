@@ -63,34 +63,18 @@ function initMap() {
   });   
   
   search(map);
-  // const  addmarker = (location) => {
-  //     var marker = new google.maps.Marker({
-  //         position: location.coords,
-  //         map:map,
-  //         icon: "./assets/images/icon.png",
-  //         label: {
-  //           text: "Rs " + JSON.stringify(all_locations[i]["price"]),
-  //           fontSize: "12px",
-  //           fontWeight: "bold"
-  //         }
-  //     })
-  //       marker.addListener("click", () => {
-  //         infowindow.open(map, marker);
-  //       });
-  // }
-
-  // for (var i in all_locations){
-  //   addmarker({coords: all_locations[i]["coordinates"], price: all_locations[i]["price"]});
-  // }
-
+  var visible_markers = []
   const htmlmarker = (location) => {
     var marker = createHTMLMapMarker({
       latlng: new google.maps.LatLng(location.coords["lat"], location.coords["lng"]),
       map: map,
       html: `<div style="background-color:white; padding:7px 10px; border-radius: 20px">
                 <h4>Rs `+location.price+`</h4>
-              </div>`
+              </div>`,
+      title: location.title
     });
+    visible_markers.push(marker);
+    // console.log(visible_markers);
 
     const contentString =
     `<div>
@@ -106,12 +90,30 @@ function initMap() {
       infowindow.open(map, marker);
     });
   }
-
-
-
   for (var i in all_locations){
     htmlmarker({coords: all_locations[i]["coordinates"],title: all_locations[i]["title"], price: all_locations[i]["price"]});
   }
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bounds =  map.getBounds();
+    //do whatever you want with those bounds
+    // visible_markers.forEach((item, index) => {
+    //   var mark = index;
+    //   console.log(mark)
+    //   // if(bounds.contains(mark.getPosition())===true){
+    //   //   console.log(item)
+    //   // }
+    // })
+    
+    for (let i=0; i < visible_markers.length; i++){
+      var m = $('#hotel-'+(i+1));
+      console.log(m);
+      if(bounds.contains(visible_markers[i].getPosition())===true){
+        m.show();
+      }else {
+        m.hide()
+      }
+    }
+  });
 
 
 
@@ -128,8 +130,16 @@ function initMap() {
   });
 
   google.maps.event.addListener(marker, 'dragend', function(evt){
-    console.log(evt.latLng.lat().toFixed(3), evt.latLng.lng().toFixed(3))
+    rev_geocode(evt.latLng.lat(), evt.latLng.lng());
+    // console.log(evt.latLng.lat().toFixed(3), evt.latLng.lng().toFixed(3))
   });
   marker.setMap(map2);
 
+  const rev_geocode = (lat, lng) => {
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+","+lng+"&key=AIzaSyAg80DUpTGkqPuo4d0ixsfb-SstG_fz06k", (data) => {
+      $('.location-map input').val(data.results[0].formatted_address);
+    })
+  }
+
 }  
+

@@ -34,7 +34,7 @@ body{
         top: 10px;
         left: 10px;
         border-radius: 5px;
-        z-index: 1;
+        z-index: 2;
         padding: 20px;
         background-color: #fff;
         width: 250px;
@@ -153,6 +153,34 @@ body{
                         background-color: hsl(0, 0%, 95%);
                     }
                 }
+            }
+        }
+    }
+    .related-hotels{
+        padding: 15px;
+        position: absolute;
+        z-index: 1;
+        left: 80px;
+        bottom: 10px;
+        border-radius: 5px;
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        width: 90%;
+        .single-hotel{
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+            .single-hotel__image{
+                height: 60px;
+                width: 60px;
+                background-color: black;
+                border-radius: 5px;
+            }
+            .single-hotel__details{
+                margin-left: 20px;
             }
         }
     }
