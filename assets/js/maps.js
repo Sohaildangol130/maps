@@ -95,28 +95,17 @@ function initMap() {
   }
   google.maps.event.addListener(map, 'bounds_changed', function() {
     var bounds =  map.getBounds();
-    //do whatever you want with those bounds
-    // visible_markers.forEach((item, index) => {
-    //   var mark = index;
-    //   console.log(mark)
-    //   // if(bounds.contains(mark.getPosition())===true){
-    //   //   console.log(item)
-    //   // }
-    // })
     
     for (let i=0; i < visible_markers.length; i++){
-      var m = $('#hotel-'+(i+1));
-      console.log(m);
+      var marker_details = $('#hotel-'+(i+1));
       if(bounds.contains(visible_markers[i].getPosition())===true){
-        m.show();
+        marker_details.show();  
       }else {
-        m.hide()
+        marker_details.hide();
       }
     }
   });
-
-
-
+  
   // search map
   const map2 = new google.maps.Map(document.getElementById("search-map"), {
     center: { lat: 27.719936621907003, lng: 85.31601948146536 },
