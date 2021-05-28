@@ -125,7 +125,7 @@ function initMap() {
   marker.setMap(map2);
 
   const rev_geocode = (lat, lng) => {
-    $.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+","+lng+"&key=AIzaSyAg80DUpTGkqPuo4d0ixsfb-SstG_fz06k", (data) => {
+    $.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+","+lng+"&key=API_KEY", (data) => {
       $('.location-map input').val(data.results[0].formatted_address);
     })
   }
